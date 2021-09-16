@@ -1,5 +1,5 @@
 #!/bin/sh
-# Low battery alterter for MacOS. Works at least in English BigSur
+# Low battery alterter for macOS. Works at least in English Big Sur (and Catalina)
 #
 # To install: add this script in to your "Launch items" (in "System Preferences"/"Users & Groups"/you). Don't forget to "chmod +x" the script.
 # To temporary stop it: kill the battery-alert process
@@ -24,7 +24,7 @@ fi
 (while true; do
   # alert only when not on AC power
   if [ `pmset -g batt | grep AC | wc -l` = "0" ]; then
-    if [ `pmset -g batt | grep '^ -' | sed 's/.*\t\([0-9]*\)%.*/\1/'` -lt "$BATTERY_ALERT_TRESHOLD" ]; then
+    if [ `pmset -g batt | grep '^ -' | sed 's/.*'$'\t''\([0-9]*\)%.*/\1/'` -lt "$BATTERY_ALERT_TRESHOLD" ]; then
       osascript -e 'say "low battery"' -e "display notification \"Low battery <$BATTERY_ALERT_TRESHOLD%\" with title \"Battery alert\" sound name \"Glass\""
     fi
   fi
